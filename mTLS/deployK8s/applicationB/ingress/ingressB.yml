@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-B-ingress
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - appA.example.com
+      secretName: app-B-tls  # Secret containing server certificate and key
+  rules:
+    - http:
+        paths:
+          - path: /v1/
+            backend:
+              service:
+                name: app-B-service
+                port:
+                  number: 80

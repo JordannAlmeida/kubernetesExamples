@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-b-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-b
+  template:
+    metadata:
+      labels:
+        app: app-b
+    spec:
+      containers:
+      - name: app-b-container
+        image: 'applicationb:latest'
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        env:
+        - name: certificatePath
+          value: /etc/ssl/certs/clientB.pfx
+        - name: passCert
+          valueFrom:
+            secretKeyRef:
+              name: client-b-pfx-secret-pass
+              key: password
+        volumeMounts:
+        - name: client-cert-mtls
+          mountPath: /etc/ssl/certs
+        resources:
+          requests:
+            cpu: '100m'
+            memory: '512Mi'
+      restartPolicy: 'Always'
+      volumes:
+      - name: client-cert-mtls
+        secret:
+          secretName: client-b-pfx-secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-b-service
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "M45NgMiSl5rFZ3YWjh4f9YgErtOJLSTEHExZbOfQfxDwO5WAkoJDQ+QUj2AkV42zuWMrQWEsejsOU4RqCwkpMQ==",
+  "success": true,
+  "projectFilePath": "C:\\implementations\\kubernetesExamples\\mTLS\\apps\\applicationB\\applicationB\\applicationB.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512"
+  ],
+  "logs": []
+}
