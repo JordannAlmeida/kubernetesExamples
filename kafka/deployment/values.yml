@@ -1,0 +1,48 @@
+# Enable KRaft
+kraft:
+  enabled: true
+  cluster:
+    id: my-kraft-cluster
+    nodes: 3
+
+# Persistence configuration
+persistence:
+  enabled: true
+  size: 1Gi
+
+# Authentication configuration
+auth:
+  enabled: true
+  existingSecret: "kafka-credentials"
+  sasl:
+    mechanisms: plain
+    plain:
+      user: kafka
+      existingSecret: kafka-credentials
+
+# External access configuration
+externalAccess:
+  enabled: true
+  service:
+    type: LoadBalancer
+    port: 9092
+
+# Metrics configuration
+metrics:
+  kafka:
+    enabled: true
+    service:
+      type: ClusterIP
+
+# Topic configuration
+topics:
+  - name: test-topic
+    replicas: 3
+    partitions: 3
+
+# Configure Kafka settings
+kafkaConfiguration:
+  auto.create.topics.enable: "false"
+  offsets.topic.replication.factor: 3
+  transaction.state.log.replication.factor: 3
+  transaction.state.log.min.isr: 2
